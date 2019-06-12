@@ -19,7 +19,11 @@ module.exports = async (timestamp) => {
 
   const query = {timestamp}
 
-  const range = await getBlockRangeForDay(timestamp)
 
-  return cache(query, () => getDailyVolume(range, timestamp))
+  return cache(query, async () => {
+    const range = await getBlockRangeForDay(timestamp)
+
+    getDailyVolume(range, timestamp)
+  })
+
 }

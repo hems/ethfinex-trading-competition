@@ -29,7 +29,7 @@ module.exports = async (range, dayTimestamp) => {
     const takerAssetData = assetDataUtils.decodeERC20AssetData(log.args.takerAssetData)
     const takerToken = config.tokenMap[takerAssetData.tokenAddress]
 
-    console.log("takerToken ->", takerToken)
+    //console.log("takerToken ->", takerToken)
 
     const makerAssetData = assetDataUtils.decodeERC20AssetData(log.args.makerAssetData)
 
@@ -38,7 +38,7 @@ module.exports = async (range, dayTimestamp) => {
 
     tokensSet.add(makerToken)
 
-    console.log("makerToken ->", makerToken)
+    //console.log("makerToken ->", makerToken)
 
     const takerAddress = log.args.takerAddress
     const takerAmount  = new BigNumber(log.args.takerAssetFilledAmount)
