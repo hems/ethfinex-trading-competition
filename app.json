@@ -1,0 +1,21 @@
+{
+  "name": "Ethfinex's trustless competition",
+  "description": "tracks most active wallets during a certain period"
+  "repository": "https://github.com/ethfinex/efx-trustless-competition",
+  "logo": "https://avatars3.githubusercontent.com/u/33315316?s=200&v=4",
+  "keywords": ["node", "express", "ethfinex", "bitfinex", "trustless", "blockchain", "exchange"],
+  "image": "heroku/nodejs",
+  "engines": {
+    "node": "10.14.2"
+  },
+  "addons": [
+    {
+      "plan": "mongolab:free"
+      "as": "MONGODB"
+    },
+    {
+      "plan": "papertrail:free"
+      "as": "PAPERTRAIL"
+    }
+  ]
+}
