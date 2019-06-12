@@ -26,38 +26,43 @@ module.exports = async (range, dayTimestamp) => {
   const tokensSet = new Set()
 
   for(log of logs){
-    const {makerAssetData, makerAssetFilledAmount} = log.args
+    const takerAssetData = assetDataUtils.decodeERC20AssetData(log.args.takerAssetData)
+    const takerToken = config.tokenMap[takerAssetData.tokenAddress]
 
-    const assetData = assetDataUtils.decodeERC20AssetData(makerAssetData)
+    console.log("takerToken ->", takerToken)
 
-    const token = config.tokenMap[assetData.tokenAddress]
-    const decimals = config.tokenRegistry[token].decimals
+    const makerAssetData = assetDataUtils.decodeERC20AssetData(log.args.makerAssetData)
 
-    tokensSet.add(token)
+    const makerToken = config.tokenMap[makerAssetData.tokenAddress]
+    const decimals = config.tokenRegistry[makerToken].decimals
+
+    tokensSet.add(makerToken)
+
+    console.log("makerToken ->", makerToken)
 
     const takerAddress = log.args.takerAddress
     const takerAmount  = new BigNumber(log.args.takerAssetFilledAmount)
-      .shiftedBy(-1 * config.tokenRegistry[token].decimals)
+      .shiftedBy(-1 * config.tokenRegistry[makerToken].decimals)
 
     const makerAddress = log.args.makerAddress
     const makerAmount  = new BigNumber(log.args.makerAssetFilledAmount)
-      .shiftedBy(-1 * config.tokenRegistry[token].decimals)
+      .shiftedBy(-1 * config.tokenRegistry[makerToken].decimals)
 
     // takerAddress is always ethfinex
     //volume[takerAddress] = volume[takerAddress] || {}
-    //volume[takerAddress][token] = volume[takerAddress].token || new BigNumber(0)
+    //volume[takerAddress][token] = volume[takerAddress][token] || new BigNumber(0)
 
     volume[makerAddress] = volume[makerAddress] || {}
-    volume[makerAddress][token] = volume[makerAddress].token || new BigNumber(0)
+    volume[makerAddress][makerToken] = volume[makerAddress][makerToken] || new BigNumber(0)
 
-    volume[makerAddress][token] = volume[makerAddress][token].plus(makerAmount)
+    volume[makerAddress][makerToken] = volume[makerAddress][makerToken].plus(makerAmount)
     //volume[takerAddress][token] = volume[takerAddress][token].plus(takerAmount)
 
 
     //console.log("makerAddress ->", makerAddress)
     //console.log("takerAddress ->", takerAddress)
 
-    //console.log("token address ->", assetData.tokenAddress)
+    //console.log("token address ->", makerAssetData.tokenAddress)
     //console.log("token         ->", token)
     //console.log("decimals      ->", decimals )
 

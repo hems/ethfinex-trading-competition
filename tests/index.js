@@ -48,6 +48,7 @@ describe('~ efx-trustless-competition', async () => {
     assert.equal(range.toBlock.number  , 7940638)
 
   })
+  **/
 
   it('get yesterday logs', async () => {
     const currentDay = moment().utc().date()
@@ -76,7 +77,8 @@ describe('~ efx-trustless-competition', async () => {
     const result = await getDailyVolumeUsingFill(range,startOfYesterday.unix())
 
   })
-  **/
+
+  return
 
   it('get results', async () => {
 
