@@ -23,11 +23,12 @@ module.exports = async (symbol, dayTimestamp) => {
       }
     }
 
-    console.log("retrying in 1000ms")
+    console.log("retrying in 5000ms")
     console.log("")
 
     retries += 1
-    await sleep(1000)
+
+    await sleep(5000 * retries)
   }
 
 }
