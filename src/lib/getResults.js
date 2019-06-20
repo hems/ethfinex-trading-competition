@@ -1,3 +1,8 @@
+/**
+ *
+ * Compute resulsts for all records on the database ( regardless of the date )
+ * and rank them by USD amount
+ */
 const collection = require('../lib/mongodb/collection')
 const BigNumber = require('bignumber.js')
 const _ = require('lodash')

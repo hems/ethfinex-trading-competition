@@ -4,7 +4,7 @@ const moment = require('moment')
 const cache = require('./lib/cache/cacheVolume')
 
 module.exports = async () => {
-  console.log('caching previous days')
+  console.log('- caching previous days')
 
   // start caching volume for previous days
   const day = moment().utc().date()

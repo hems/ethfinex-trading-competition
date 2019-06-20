@@ -23,7 +23,7 @@ module.exports = async (timestamp) => {
   return cache(query, async () => {
     const range = await getBlockRangeForDay(timestamp)
 
-    getDailyVolume(range, timestamp)
+    return getDailyVolume(range, timestamp)
   })
 
 }

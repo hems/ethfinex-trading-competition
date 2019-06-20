@@ -7,6 +7,7 @@ const getDailyVolume = require('../src/lib/getDailyVolume')
 const getBlockRangeForDay = require('../src/lib/getBlockRangeForDay')
 const getDailyVolumeUsingFill = require('../src/lib/getDailyVolumeUsingFill')
 const getResults = require('../src/lib/getResults')
+const getResultsByToken = require('../src/lib/getResultsByToken')
 const moment = require('moment')
 
 describe('~ efx-trustless-competition', async () => {
@@ -48,7 +49,6 @@ describe('~ efx-trustless-competition', async () => {
     assert.equal(range.toBlock.number  , 7940638)
 
   })
-  **/
 
   it('get yesterday logs', async () => {
     const currentDay = moment().utc().date()
@@ -76,14 +76,26 @@ describe('~ efx-trustless-competition', async () => {
 
     const result = await getDailyVolumeUsingFill(range,startOfYesterday.unix())
 
+    assert.ok(result.volume)
   })
 
-  return
 
   it('get results', async () => {
 
     const result = await getResults()
 
+  })
+  **/
+
+  it('get results by token', async () => {
+
+    const token = 'ETH'
+    const result = await getResultsByToken(token)
+
+    assert.equal(result.token, token)
+    assert.ok(result.ranking)
+
+    console.log("result ->", result)
 
   })
 

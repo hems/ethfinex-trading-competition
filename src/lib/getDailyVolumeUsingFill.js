@@ -29,48 +29,47 @@ module.exports = async (range, dayTimestamp) => {
     const takerAssetData = assetDataUtils.decodeERC20AssetData(log.args.takerAssetData)
     const takerToken = config.tokenMap[takerAssetData.tokenAddress]
 
-    //console.log("takerToken ->", takerToken)
-
     const makerAssetData = assetDataUtils.decodeERC20AssetData(log.args.makerAssetData)
-
     const makerToken = config.tokenMap[makerAssetData.tokenAddress]
-    const decimals = config.tokenRegistry[makerToken].decimals
 
     tokensSet.add(makerToken)
-
-    //console.log("makerToken ->", makerToken)
+    tokensSet.add(takerToken)
 
     const takerAddress = log.args.takerAddress
     const takerAmount  = new BigNumber(log.args.takerAssetFilledAmount)
-      .shiftedBy(-1 * config.tokenRegistry[makerToken].decimals)
+      .shiftedBy(-1 * config.tokenRegistry[takerToken].decimals)
 
     const makerAddress = log.args.makerAddress
     const makerAmount  = new BigNumber(log.args.makerAssetFilledAmount)
       .shiftedBy(-1 * config.tokenRegistry[makerToken].decimals)
 
     // takerAddress is always ethfinex
-    //volume[takerAddress] = volume[takerAddress] || {}
-    //volume[takerAddress][token] = volume[takerAddress][token] || new BigNumber(0)
 
     volume[makerAddress] = volume[makerAddress] || {}
     volume[makerAddress][makerToken] = volume[makerAddress][makerToken] || new BigNumber(0)
 
     volume[makerAddress][makerToken] = volume[makerAddress][makerToken].plus(makerAmount)
-    //volume[takerAddress][token] = volume[takerAddress][token].plus(takerAmount)
+
+    volume[makerAddress] = volume[makerAddress] || {}
+    volume[makerAddress][takerToken] = volume[makerAddress][takerToken] || new BigNumber(0)
+
+    volume[makerAddress][takerToken] = volume[makerAddress][takerToken].plus(takerAmount)
 
 
-    //console.log("makerAddress ->", makerAddress)
-    //console.log("takerAddress ->", takerAddress)
-
-    //console.log("token address ->", makerAssetData.tokenAddress)
-    //console.log("token         ->", token)
-    //console.log("decimals      ->", decimals )
+    //console.log("---")
 
     //console.log("maker         ->", makerAddress)
-    //console.log("maker amount  ->", makerAmount)
+    //console.log("maker token   ->", makerToken)
+    //console.log("maker amount  ->", makerAmount.toPrecision())
+
+    //console.log("")
 
     //console.log("taker         ->", takerAddress)
-    //console.log("taker amount  ->", takerAmount)
+    //console.log("taker token   ->", takerToken)
+    //console.log("taker amount  ->", takerAmount.toPrecision())
+
+    //
+    //break
   }
 
   // transform tokens into array
