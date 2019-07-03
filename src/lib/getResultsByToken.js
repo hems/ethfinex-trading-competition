@@ -11,7 +11,9 @@ module.exports = async (token) => {
 
   Stats = collection('stats')
 
-  const docs = await Stats.find({}).toArray()
+  const options = {sort: {date: 1}}
+
+  const docs = await Stats.find({}, options).toArray()
 
   const dates = []
   const volume = {}
