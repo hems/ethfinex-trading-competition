@@ -2,9 +2,11 @@
 
 # EFX Trustless Competition
 
-  - tracks most active wallets during the competition period
+  This API provides the volume ranking of wallet addresses trading on https://trustless.ethfinex.com
 
 # Example endpoints
+
+  - Display volume of for 13/06/2019 for all tokens traded and respective USD values: [/api/v1/date/2019/06/13](http://competition.nectar.community/api/v1/date/2019/06/13)
 
   - Display volume ranking ( in ether ) for ethereum trades since 13/06/1028 - [api/v1/resultsByToken/eth](http://competition.nectar.community/api/v1/resultsByToken/eth)
 

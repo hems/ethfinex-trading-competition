@@ -16,13 +16,6 @@ startup = async () => {
   const resultsByToken = require('./routes/api/v1/resultsByToken')
 
   express()
-    .use(express.static(path.join(__dirname, 'public')))
-
-    .set('views', path.join(__dirname, 'views'))
-    .set('view engine', 'ejs')
-
-    .get('/', (req, res) => res.render('pages/index'))
-
     .get('/api/v1/results', results )
     .get('/api/v1/resultsByToken/:token', resultsByToken )
     .get('/api/v1/yesterday', yesterday )
