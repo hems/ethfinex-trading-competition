@@ -3,6 +3,7 @@ const getConfig = require('../config')
 const moment = require('moment')
 
 const toDate = require('./timestampToDate')
+const getCurrentBlock = require('./getCurrentBlock')
 
 /**
  * Find nearest block to given timestamp, expect timestamp in seconds
@@ -20,8 +21,7 @@ module.exports = async (targetTimestamp, lowerLimitStamp, higherLimitStamp) => {
   let averageBlockTime = 17 * 1.5
 
   // get current block number
-  const currentBlockNumber = await web3.eth.getBlockNumber()
-  let block = await web3.eth.getBlock(currentBlockNumber)
+  let block = await getCurrentBlock(web3)
 
   let requestsMade = 0
 
