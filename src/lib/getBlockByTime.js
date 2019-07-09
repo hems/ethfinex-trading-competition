@@ -25,7 +25,7 @@ module.exports = async (targetTimestamp, lowerLimitStamp, higherLimitStamp) => {
 
   let requestsMade = 0
 
-  let blockNumber = currentBlockNumber
+  let blockNumber = block.number
 
   while(block.timestamp > targetTimestamp){
 
@@ -72,7 +72,7 @@ module.exports = async (targetTimestamp, lowerLimitStamp, higherLimitStamp) => {
       while(block.timestamp < higherLimitStamp){
         blockNumber += 1
 
-        if(blockNumber > currentBlockNumber) break;
+        if(blockNumber > blockNumber) break;
 
         const tempBlock = await web3.eth.getBlock(blockNumber)
 
