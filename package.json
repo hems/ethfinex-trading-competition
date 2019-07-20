@@ -12,6 +12,7 @@
   "dependencies": {
     "@0x/contract-wrappers": "^9.1.4",
     "bignumber.js": "^9.0.0",
+    "cors": "^2.8.5",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "lodash": "^4.17.13",
