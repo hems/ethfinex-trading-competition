@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-validator": "^6.1.1",
     "lodash": "^4.17.13",
     "lokijs": "^1.5.6",
     "moment": "^2.23.0",
@@ -22,6 +23,7 @@
     "node-cron": "^2.0.3",
     "request-promise": "^4.2.2",
     "sleep-promise": "^8.0.1",
+    "validate.io-timestamp": "^1.0.2",
     "web3": "1.0.0-beta.37"
   },
   "devDependencies": {

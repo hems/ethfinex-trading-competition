@@ -6,6 +6,7 @@ startup = async () => {
 
   // setup webserver
   const express = require('express')
+  const expressValidator = require('express-validator')
   const cors = require('cors')
   const path = require('path')
 
@@ -18,17 +19,20 @@ startup = async () => {
 
   const app = express()
 
-
   app
     .disable('x-powered-by')
     .use(cors())
 
-    .get('/api/v1/results', results )
-    .get('/api/v1/resultsByToken/:token', resultsByToken )
     .get('/api/v1/yesterday', yesterday )
     .get('/api/v1/date/:year/:month/:day', byDate )
 
     .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+  // add 'api/v1/results' endpoint
+  results(app)
+
+  // add `api/v1/resultsByToken' endpoint
+  resultsByToken(app)
 
 
   // schedules every day job
